@@ -13,7 +13,7 @@ spec:
   project: default  # provision ArgoCD Tenants (Projects)
 
   source:
-    path: argo-tenants/argocd
+    path: apps-configs/argocd
     repoURL: git@github.com:SergK/edp-grub.git
     targetRevision: main
     directory:

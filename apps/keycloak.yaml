@@ -13,7 +13,7 @@ spec:
   project: default  # provision Keycloak Groups to be used by ArgoCD
 
   source:
-    path: argo-tenants/keycloak
+    path: apps-configs/keycloak
     repoURL: git@github.com:SergK/edp-grub.git
     targetRevision: main
     directory:
