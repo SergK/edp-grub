@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: team-bar
+  namespace: argocd
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: CD pipelines for team-bar
+  roles:
+    - name: developer
+      description: Users for team-bar tenant
+      policies:
+        - p, proj:team-bar:developer, applications, create, team-bar/*, allow
+        - p, proj:team-bar:developer, applications, delete, team-bar/*, allow
+        - p, proj:team-bar:developer, applications, get, team-bar/*, allow
+        - p, proj:team-bar:developer, applications, override, team-bar/*, allow
+        - p, proj:team-bar:developer, applications, sync, team-bar/*, allow
+        - p, proj:team-bar:developer, applications, update, team-bar/*, allow
+        - p, proj:team-bar:developer, repositories, create, team-bar/*, allow
+        - p, proj:team-bar:developer, repositories, delete, team-bar/*, allow
+        - p, proj:team-bar:developer, repositories, update, team-bar/*, allow
+        - p, proj:team-bar:developer, repositories, get, team-bar/*, allow
+        - p, proj:team-bar:developer, clusters, create, team-bar/*, allow
+        - p, proj:team-bar:developer, clusters, delete, team-bar/*, allow
+        - p, proj:team-bar:developer, clusters, update, team-bar/*, allow
+        - p, proj:team-bar:developer, clusters, get, team-bar/*, allow
+      groups:
+        # Keycloak Group name
+        - ArgoCD-team-bar-users
+  destinations:
+    # ensure we can deploy to ns with tenant prefix
+    - namespace: 'team-bar-*'
+    # allow to deploy to specific server (local in our case)
+      server: https://kubernetes.default.svc
+  # Deny all cluster-scoped resources from being created, except for Namespace
+  clusterResourceWhitelist:
+  - group: ''
+    kind: Namespace
+  # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange, NetworkPolicy
+  namespaceResourceBlacklist:
+  - group: ''
+    kind: ResourceQuota
+  - group: ''
+    kind: LimitRange
+  - group: ''
+    kind: NetworkPolicy
+  # we are ok to create any resources inside namespace
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  # we are ok to deploy from any repo
+  sourceRepos:
+    - '*'
