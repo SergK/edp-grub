@@ -7,13 +7,13 @@ metadata:
     app.kubernetes.io/managed-by: edp-grub
     app.kubernetes.io/name: edp-grub  # tenant name - configurable and must be uniq in cluster
     app.edp.epam.com/tenant: edp-grub # tenant name - configurable and must be uniq in cluster
-  name: argo-tenants
+  name: grub-argocd
   namespace: argocd
 spec:
   project: default  # provision ArgoCD Tenants (Projects)
 
   source:
-    path: apps-configs/argocd
+    path: apps-configs/grub/argocd
     repoURL: git@github.com:SergK/edp-grub.git
     targetRevision: main
     directory:
@@ -21,7 +21,7 @@ spec:
       recurse: true
 
   destination:
-    namespace: argocd
+    namespace: argocd   # ArgoCD Namespace
     server: https://kubernetes.default.svc
 
   syncPolicy:
