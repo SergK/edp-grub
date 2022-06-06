@@ -7,13 +7,13 @@ metadata:
     app.kubernetes.io/managed-by: edp-grub
     app.kubernetes.io/name: edp-grub  # tenant name - configurable and must be uniq in cluster
     app.edp.epam.com/tenant: edp-grub # tenant name - configurable and must be uniq in cluster
-  name: argocd-tenant
+  name: argo-keycloak
   namespace: argocd
 spec:
-  project: default  # provision ArgoCD Tenants (Projects)
+  project: default  # provision Keycloak Groups to be used by ArgoCD
 
   source:
-    path: apps-configs/argocd
+    path: apps-configs/keycloak
     repoURL: git@github.com:SergK/edp-grub.git
     targetRevision: main
     directory:
@@ -21,7 +21,7 @@ spec:
       recurse: true
 
   destination:
-    namespace: argocd
+    namespace: edp-delivery-sk-delivery-dev   # EDP namespace
     server: https://kubernetes.default.svc
 
   syncPolicy:
