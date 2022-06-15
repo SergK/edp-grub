@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: team-foo-petclinic
+spec:
+  # we create application for specific project
+  project: team-foo
+  destination:
+    # we must ensure prefix (team-foo-*) is correct for namespace
+    namespace: team-foo-petclinic
+    # this must be whitelisted on project level
+    server: https://kubernetes.default.svc
+  source:
+    path: deploy-templates
+    repoURL: https://github.com/sergk/spring-petclinic.git
+    targetRevision: edp     # we have deployment templates here
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  ignoreDifferences:
+  - group: argoproj.io
+    jsonPointers:
+    - /status
+    kind: Application
