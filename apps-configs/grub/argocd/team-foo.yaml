@@ -26,6 +26,10 @@ spec:
         - p, proj:team-foo:developer, clusters, delete, team-foo/*, allow
         - p, proj:team-foo:developer, clusters, update, team-foo/*, allow
         - p, proj:team-foo:developer, clusters, get, team-foo/*, allow
+        - p, proj:team-foo:developer, certificates, create, team-foo/*, allow
+        - p, proj:team-foo:developer, certificates, delete, team-foo/*, allow
+        - p, proj:team-foo:developer, certificates, update, team-foo/*, allow
+        - p, proj:team-foo:developer, certificates, get, team-foo/*, allow
       groups:
         # Keycloak Group name
         - ArgoCD-team-foo-users

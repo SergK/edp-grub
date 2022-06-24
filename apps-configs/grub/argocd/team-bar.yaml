@@ -26,6 +26,10 @@ spec:
         - p, proj:team-bar:developer, clusters, delete, team-bar/*, allow
         - p, proj:team-bar:developer, clusters, update, team-bar/*, allow
         - p, proj:team-bar:developer, clusters, get, team-bar/*, allow
+        - p, proj:team-bar:developer, certificates, create, team-bar/*, allow
+        - p, proj:team-bar:developer, certificates, delete, team-bar/*, allow
+        - p, proj:team-bar:developer, certificates, update, team-bar/*, allow
+        - p, proj:team-bar:developer, certificates, get, team-bar/*, allow
       groups:
         # Keycloak Group name
         - ArgoCD-team-bar-users
