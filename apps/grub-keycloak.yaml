@@ -14,7 +14,7 @@ spec:
 
   source:
     path: apps-configs/grub/keycloak
-    repoURL: git@github.com:SergK/edp-grub.git
+    repoURL: https://github.com/sergk/edp-grub.git
     targetRevision: main
     directory:
       jsonnet: {}
