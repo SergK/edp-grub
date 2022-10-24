@@ -21,7 +21,7 @@ spec:
       recurse: true
 
   destination:
-    namespace: edp-delivery-sk-delivery-dev   # EDP namespace, since keycloak operator is here
+    namespace: edp-delivery-eks-sit   # EDP namespace, since keycloak operator is here
     server: https://kubernetes.default.svc
 
   syncPolicy:
