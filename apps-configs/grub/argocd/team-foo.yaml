@@ -53,3 +53,6 @@ spec:
   # we are ok to deploy from any repo
   sourceRepos:
     - '*'
+  # get applications from namespace to apply this AppProject
+  sourceNamespaces:
+    - team-foo
